@@ -82,3 +82,14 @@ CREATE TABLE IF NOT EXISTS `tbladmin` (
     `email` VARCHAR(255),
     `password` VARCHAR(255)
 );
+
+CREATE TABLE `tblpage` (
+  `ID` int(10) NOT NULL,
+  `PageType` varchar(200) DEFAULT NULL,
+  `PageTitle` mediumtext DEFAULT NULL,
+  `PageDescription` mediumtext DEFAULT NULL,
+  `Email` varchar(200) DEFAULT NULL,
+  `MobileNumber` bigint(10) DEFAULT NULL,
+  `UpdationDate` date DEFAULT NULL,
+  `Timing` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
