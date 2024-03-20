@@ -1,0 +1,84 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS `Zuri_art_gallery`;
+
+-- Use the database
+USE `Zuri_art_gallery`;
+
+-- Create tblacrylics table
+CREATE TABLE IF NOT EXISTS `tblacrylics` (
+    `paintingid` INT AUTO_INCREMENT PRIMARY KEY,
+    `acrylicpicture` VARCHAR(255),
+    `name` VARCHAR(255),
+    `description` TEXT,
+    `price` DECIMAL(10, 2)
+);
+
+-- Create tblencaustic table
+CREATE TABLE IF NOT EXISTS `tblencaustic` (
+    `paintingid` INT AUTO_INCREMENT PRIMARY KEY,
+    `encausticpicture` VARCHAR(255),
+    `name` VARCHAR(255),
+    `description` TEXT,
+    `price` DECIMAL(10, 2)
+);
+
+-- Create tbloilpainting table
+CREATE TABLE IF NOT EXISTS `tbloilpainting` (
+    `paintingid` INT AUTO_INCREMENT PRIMARY KEY,
+    `oilpaintingpicture` VARCHAR(255),
+    `name` VARCHAR(255),
+    `description` TEXT,
+    `price` DECIMAL(10, 2)
+);
+
+-- Create tblimpasto table
+CREATE TABLE IF NOT EXISTS `tblimpasto` (
+    `paintingid` INT AUTO_INCREMENT PRIMARY KEY,
+    `impastopicture` VARCHAR(255),
+    `name` VARCHAR(255),
+    `description` TEXT,
+    `price` DECIMAL(10, 2)
+);
+
+-- Create tblwoodcarving table
+CREATE TABLE IF NOT EXISTS `tblwoodcarving` (
+    `paintingid` INT AUTO_INCREMENT PRIMARY KEY,
+    `woodcarvingpicture` VARCHAR(255),
+    `name` VARCHAR(255),
+    `description` TEXT,
+    `price` DECIMAL(10, 2)
+);
+
+-- Create tbluser table
+CREATE TABLE IF NOT EXISTS `tbluser` (
+    `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Userid` INT,
+    `firstname` VARCHAR(255),
+    `lastname` VARCHAR(255),
+    `emailaddress` VARCHAR(255),
+    `phonenumber` VARCHAR(20),
+    `country` VARCHAR(255),
+    `county` VARCHAR(255),
+    `location` VARCHAR(255),
+    `occupation` VARCHAR(255)
+);
+
+-- Create tblcart table
+CREATE TABLE IF NOT EXISTS `tblcart` (
+    `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `Userid` INT,
+    `paintingname` VARCHAR(255),
+    `category` VARCHAR(255),
+    `price` DECIMAL(10, 2),
+    `payments` INT
+);
+
+-- Create tbladmin table
+CREATE TABLE IF NOT EXISTS `tbladmin` (
+    `ID` INT AUTO_INCREMENT PRIMARY KEY,
+    `adminname` VARCHAR(255),
+    `Adminusername` VARCHAR(255),
+    `mobilenumber` VARCHAR(20),
+    `email` VARCHAR(255),
+    `password` VARCHAR(255)
+);
