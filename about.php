@@ -1,21 +1,51 @@
 <?php
-include('includes/dbconnection.php');
+include('dbconnection.php');
 session_start();
 error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Art Web</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet" >
-	<link href="css/font-awesome.min.css" rel="stylesheet" >
-	<link href="css/global.css" rel="stylesheet">
-	<link href="css/about.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&display=swap" rel="stylesheet">
-	<script src="js/bootstrap.bundle.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Art Web</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <link href="css/font-awesome.min.css" rel="stylesheet" >
+    <link href="css/global.css" rel="stylesheet">
+    <link href="css/about.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&display=swap" rel="stylesheet">
+    <style>
+      /* New CSS for the about section */
+      .highlight-about {
+        position: relative;
+        width: 65%;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .highlight-image {
+        width: 100%;
+        max-height: 600px; /* Adjust as needed */
+        object-fit: cover; /* Ensure the image covers the container */
+        border-radius: 10px;
+      }
+
+      .highlight-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(128, 128, 128, 0.5);
+        padding: 20px;
+        border-radius: 5px;
+        color: #fff;
+        text-align: center;
+        max-width: 80%;
+        font-size: 14px; /* Adjust as needed */
+      }
+    </style>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <section id="header">
@@ -31,11 +61,11 @@ error_reporting(0);
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="index.html">Home</a>
         </li>
-		<li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link active" href="about.html">About </a>
         </li>
 
-		<li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Product
           </a>
@@ -45,7 +75,7 @@ error_reporting(0);
           </ul>
         </li>
 
-		<li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Blog
           </a>
@@ -55,7 +85,7 @@ error_reporting(0);
           </ul>
         </li>
 
-		<li class="nav-item dropdown">
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Pages
           </a>
@@ -65,7 +95,7 @@ error_reporting(0);
           </ul>
         </li>
 
-		<li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" href="contact.html">Contact</a>
         </li>
 
@@ -78,29 +108,36 @@ error_reporting(0);
 <section id="footer" class="pt-3 pb-3">
  <div class="container-fluid">
    <div class="row footer_1">
-    <div class="col-md-3">
-	 <div class="footer_1i">
-	  <hr class="line_1">
-	  <h5 class="mb-3">ABOUT</h5>
-		 <?php
-          $ret = mysqli_query($con, "select * from tblpage where PageType='aboutus' ");
-          $cnt = 1;
-          while ($row = mysqli_fetch_array($ret)) {
+    <div class="col-md-12">
+     <div class="footer_1i">
+      <hr class="line_1">
+      <h5 class="mb-3">ABOUT</h5>
+         <?php
+          $ret = mysqli_query($con, "SELECT * FROM tblpage WHERE PageType='aboutus'");
+          if (!$ret) {
+              echo "Error: " . mysqli_error($con);
+          } else {
+              while ($row = mysqli_fetch_array($ret)) {
+                  // Display the about information inside the highlighted box
+                  echo "<div class='highlight-about'>";
+                  echo "<img src='pictures/zar1.jpg' class='highlight-image' alt=''>";
+                  echo "<div class='highlight-text'>" . $row['PageDescription'] . "</div>";
+                  echo "</div>";
+              }
+          }
           ?>
-		 <!-- Your PHP code to display about information goes here -->
-		 <?php } ?> <!-- Close the while loop and PHP block -->
-	 </div>
-	</div>
+     </div>
+    </div>
    <div class="row footer_2 mt-4 text-center">
     <div class="col-md-12">
-	 <ul>
-	  <li class="d-inline-block me-3 font_14"><a href="#">CONTACT</a></li>
-	  <li class="d-inline-block me-3 font_14"><a href="#">PRIVACY POLICY</a></li>
-	  <li class="d-inline-block me-3 font_14"><a href="#">TERMS OF USE</a></li>
-	  <li class="d-inline-block font_14"><a href="#">FAQ</a></li>
-	 </ul>
-	 <p class="mb-0">© 2013 Your Website Name. All Rights Reserved | Design by <a class="col_pink" href="http://www.templateonweb.com">TemplateOnWeb</a></p>
-	</div>
+     <ul>
+      <li class="d-inline-block me-3 font_14"><a href="#">CONTACT</a></li>
+      <li class="d-inline-block me-3 font_14"><a href="#">PRIVACY POLICY</a></li>
+      <li class="d-inline-block me-3 font_14"><a href="#">TERMS OF USE</a></li>
+      <li class="d-inline-block font_14"><a href="#">FAQ</a></li>
+     </ul>
+     <p class="mb-0">© 2013 Your Website Name. All Rights Reserved | Design by <a class="col_pink" href="http://www.templateonweb.com">TemplateOnWeb</a></p>
+    </div>
    </div>
  </div>
  </div>
@@ -116,10 +153,10 @@ var navbar_height = document.querySelector('.navbar').offsetHeight;
 function myFunction() {
   if (window.pageYOffset >= sticky + navbar_height) {
     navbar_sticky.classList.add("sticky")
-	document.body.style.paddingTop = navbar_height + 'px';
+    document.body.style.paddingTop = navbar_height + 'px';
   } else {
     navbar_sticky.classList.remove("sticky");
-	document.body.style.paddingTop = '0'
+    document.body.style.paddingTop = '0'
   }
 }
 </script>
