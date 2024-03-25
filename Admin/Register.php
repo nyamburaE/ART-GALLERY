@@ -1,3 +1,32 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include('dbconnection.php');// Include the correct file for database connection
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // Prepare form data
+    $fullname = $_POST['name'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $phonenumber = $_POST['phonenumber'];
+    $password = $_POST['password']; // Rename password variable to avoid conflict
+
+
+    // SQL statement to insert data into admin table
+    $sql = "INSERT INTO admin (fullname, username, phonenumber, email, password)
+            VALUES ('$fullname', '$username', '$phonenumber', '$email', '$password')";
+
+    // Execute SQL statement
+    $result = mysqli_query($con, $sql);
+    if ($result) {
+        // Redirect to registration successful page
+        header("Location: registration_successful.php");
+        exit(); // Add exit() to prevent further execution
+    } else {
+        die(mysqli_error($connect));
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -218,7 +247,7 @@
                 </div>
                 <div class="input-box">
                     <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required pattern="(07)[0-9]{8}" placeholder="Enter Phone Number" title="Please enter a valid Kenyan phone number starting with '07' followed by 8 digits">
+            <input type="tel" id="phone" name="phonenumber" required pattern="(07)[0-9]{8}" placeholder="Enter Phone Number" title="Please enter a valid Kenyan phone number starting with '07' followed by 8 digits">
             <span id="phoneError" class="error-message"></span><br>
                 </div>
                 <div class="input-box">
@@ -272,33 +301,7 @@
         }
     }
 
-<?php
-include 'tbladmin.php'; // Include the correct file for database connection
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // Prepare form data
-    $fullname = $_POST['name'];
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $phonenumber = $_POST['phone'];
-    $password = $_POST['password']; // Rename password variable to avoid conflict
-    
-
-    // SQL statement to insert data into tbladmin table
-    $sql = "INSERT INTO admin (fullname, username, phonenumber, email, password)
-            VALUES ('$fullname', '$username', '$phonenumber', '$email', '$password')";
-
-    // Execute SQL statement
-    $result = mysqli_query($connect, $sql);
-    if ($result) {
-        // Redirect to registration successful page
-        header("Location: registration_successful.php");
-        exit(); // Add exit() to prevent further execution
-    } else {
-        die(mysqli_error($connect));
-    }
-}
-?>
 
 </script>
 <script src="https://kit.fontawesome.com/yourcode.js"></script>

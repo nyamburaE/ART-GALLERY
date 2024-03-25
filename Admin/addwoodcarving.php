@@ -154,20 +154,24 @@ if (isset($_POST['submit'])) {
 </head>
 <body>
     <!-- Header section -->
-   <section id="header">
-           <nav class="navbar navbar-expand-md navbar-light" id="navbar_sticky">
-               <div class="container-xl">
-                   <a class="navbar-brand fs-2 p-0 fw-bold text-white" href="index.html"><i class="fa fa-pencil col_pink me-1 align-middle"></i> art <span class="col_pink span_1">WEB</span>
-                       <br> <span class="font_12 span_2">DIGITAL ART</span></a>
-                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                       <!-- Welcome Admin -->
-                       <span class="navbar-text me-3" style="color: #d63384;">Welcome Admin</span>
-                       <!-- Profile Image -->
-                       <img src="C:\xampp\htdocs\zamuri art\pictures/profileimage.jpg" alt="Profile Image" class="rounded-circle" style="width: 40px; height: 40px;">
-                   </div>
-               </div>
-           </nav>
-   </section>
+<section id="header">
+	<nav class="navbar navbar-expand-md navbar-light" id="navbar_sticky">
+		<div class="container-xl">
+			<a class="navbar-brand fs-2 p-0 fw-bold text-white" href="index.html"><i class="fa fa-pencil col_pink me-1 align-middle"></i> art <span class="col_pink span_1">WEB</span>
+				<br> <span class="font_12 span_2">DIGITAL ART</span></a>
+				 <a class="nav-item" class="nav-link active" aria-current="page" href="index.html">Home</a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<!-- Welcome Admin -->
+				<span class="navbar-text me-3" style="color: #d63384;">Welcome Admin</span>
+				<!-- Profile Image -->
+				<img src="C:\xampp\htdocs\zamuri art\pictures/profileimage.jpg" alt="Profile Image" class="rounded-circle" style="width: 40px; height: 40px;">
+			</div>
+
+
+
+		</div>
+	</nav>
+</section>
 
     <!-- Left sidebar section -->
 
@@ -178,7 +182,7 @@ if (isset($_POST['submit'])) {
                   <a href="#"><i class="la la-file"></i><span class="menu-title" data-i18n="nav.footers.main">Wood Carving</span></a>
                   <ul class="menu-content">
                       <li><a class="menu-item" href="addwoodcarving.php" data-i18n="nav.footers.footer_light">Add Wood Carving</a></li>
-                      <li><a class="menu-item" href="woodcarving.php" data-i18n="nav.footers.footer_dark">Wood Carving List</a></li>
+
                   </ul>
               </li>
       <hr>
@@ -187,7 +191,7 @@ if (isset($_POST['submit'])) {
                   <a href="#"><i class="la la-file"></i><span class="menu-title" data-i18n="nav.footers.main">Oil Paintings</span></a>
                   <ul class="menu-content">
                       <li><a class="menu-item" href="addoilpainting.php" data-i18n="nav.footers.footer_light">Add Oil Painting</a></li>
-                      <li><a class="menu-item" href="oilpainting.php" data-i18n="nav.footers.footer_dark">Oil Painting List</a></li>
+
                   </ul>
               </li>
       <hr>
@@ -196,7 +200,7 @@ if (isset($_POST['submit'])) {
                   <a href="#"><i class="la la-file"></i><span class="menu-title" data-i18n="nav.footers.main">Impasto Paintings</span></a>
                   <ul class="menu-content">
                       <li><a class="menu-item" href="addimpasto.php" data-i18n="nav.footers.footer_light">Add Impasto Painting</a></li>
-                      <li><a class="menu-item" href="impasto.php" data-i18n="nav.footers.footer_dark">Impasto Painting List</a></li>
+
                   </ul>
               </li>
       <hr>
@@ -205,7 +209,7 @@ if (isset($_POST['submit'])) {
                   <a href="#"><i class="la la-file"></i><span class="menu-title" data-i18n="nav.footers.main">Encaustic Paintings</span></a>
                   <ul class="menu-content">
                       <li><a class="menu-item" href="addencaustic.php" data-i18n="nav.footers.footer_light">Add Encaustic Painting</a></li>
-                      <li><a class="menu-item" href="encaustic.php" data-i18n="nav.footers.footer_dark">Encaustic Painting List</a></li>
+
                   </ul>
               </li>
       <hr>
@@ -214,7 +218,7 @@ if (isset($_POST['submit'])) {
                   <a href="#"><i class="la la-file"></i><span class="menu-title" data-i18n="nav.footers.main">Acrylic Paintings</span></a>
                   <ul class="menu-content">
                       <li><a class="menu-item" href="addacrylics.php" data-i18n="nav.footers.footer_light">Add Acrylic Painting</a></li>
-                      <li><a class="menu-item" href="acrylic.php" data-i18n="nav.footers.footer_dark">Acrylic Painting List</a></li>
+
                   </ul>
               </li>
       <hr>
@@ -223,14 +227,8 @@ if (isset($_POST['submit'])) {
                   <a href="orders.php"><i class="la la-download"></i><span class="menu-title" data-i18n="nav.dash.main">Orders</span></a>
               </li>
       <hr>
-              <!-- Pages -->
-              <li class="nav-item">
-                  <a href="#"><i class="la la-download"></i><span class="menu-title" data-i18n="nav.footers.main">Pages</span></a>
-                  <ul class="menu-content">
-                      <li><a class="menu-item" href="aboutus.php" data-i18n="nav.footers.footer_light">About Us</a></li>
-                      <li><a class="menu-item" href="contactus.php" data-i18n="nav.footers.footer_dark">Contact Us</a></li>
-                  </ul>
-              </li>
+
+
           </ul>
       </section>
 

@@ -1,31 +1,41 @@
 <?php
-session_start(); // Start session to store user data
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include('dbconnection.php');
 
-include 'tbladmin.php'; // Include the file containing database connection details
-
-$success = 0;
-$unsuccess = 0;
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // Retrieve username and password from the login form
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Query to check if the user exists in the database
-    $sql = "SELECT * FROM tbladmin WHERE username = '$username' AND password = '$password'";
-    $result = mysqli_query($connect, $sql);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        // If user exists, redirect to success page
-        $_SESSION['username'] = $username; // Store username in session for future use
-        header("Location: dashboard.php"); // Redirect to dashboard or success page
-        exit();
+if (isset($_POST['login'])) {
+    // Check if the 'username' index is set in $_POST
+    if (isset($_POST['username'])) {
+        $adminuser = $_POST['username'];
+        $password = $_POST['password']; // Password should not be hashed here
+        $sql = "SELECT phonenumber FROM admin WHERE username = ? AND password = ?";
+        $stmt = $con->prepare($sql);
+        // Bind parameters and execute the statement
+        $stmt->bind_param("ss", $adminuser, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result && $result->num_rows > 0) {
+            // Fetching phone number from the result
+            $row = $result->fetch_assoc();
+            $phonenumber = $row['phonenumber'];
+            $_SESSION['phonenumber'] = $phonenumber;
+            header("Location: dashboard.php");
+            exit();
+        } else {
+            echo "<script>alert('Invalid username or password');</script>";
+        }
     } else {
-        // If user doesn't exist, display error message
-        $error_message = "Invalid username or password. Please try again.";
+        echo "<script>alert('Username not provided');</script>";
     }
 }
 ?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -278,35 +288,34 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 <body>
     <div class="box-form">
-    <div class="left">
-        <div class="overlay">
-            <h1>Hello World.</h1>
-            <p>Welcome to Zuri Art Gallery.</p>
-            <p><h3>Karibu Nyumbani</h3></p>
+        <div class="left">
+            <div class="overlay">
+                <h1>Hello World.</h1>
+                <p>Welcome to Zuri Art Gallery.</p>
+                <p><h3>Karibu Nyumbani</h3></p>
+            </div>
         </div>
-    </div>
 
         <div class="right">
             <h4>Login</h4>
             <p>Don't have an account? <a href="Register.php">Create one through here</a> Takes less than a minute.</p>
-            <div class="inputs">
-                <input type="text" id="username" placeholder="Enter Username" required>
-                <br>
-                <input type="password" id="password" placeholder="Input Password" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}">
-                <button onclick="togglePasswordVisibility()" id="togglePassword">
-                    <i class="fas fa-eye-slash" id="eyeIcon"></i> Show Password
-                </button>
-            </div>
-
-            <!-- Add a <label> element around the checkbox and associated text -->
-            <label for="remember-me">
-                <input type="checkbox" id="remember-me" name="remember-me" checked>
-                Remember Me
-            </label>
-
-            <p><a href="forgot_password.php">Forgot password?</a></p>
-
-            <button>Login</button>
+            <form method="post" action="">
+                <div class="inputs">
+                    <input type="text" id="username"  name="username" placeholder="Enter Username" required>
+                    <br>
+                    <input type="password" id="password" name="password" placeholder="Input Password" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}">
+                    <button type="submit" name="login">Login</button>
+                    <button type="button" onclick="togglePasswordVisibility()" id="togglePassword">
+                        <i class="fas fa-eye-slash" id="eyeIcon"></i> Show Password
+                    </button>
+                </div>
+                <!-- Remember me, forgot password, etc. -->
+                <label for="remember-me">
+                    <input type="checkbox" id="remember-me" name="remember-me" checked>
+                    Remember Me
+                </label>
+                <p><a href="forgot_password.php">Forgot password?</a></p>
+            </form>
         </div>
     </div>
     </form>
